@@ -10,21 +10,23 @@ namespace CompAndDel
         static void Main(string[] args)
         {
             PictureProvider pictureProvider = new PictureProvider();
-            IPicture picOrig = pictureProvider.GetPicture("Tero.jpg");
+            IPicture picOrig = pictureProvider.GetPicture("jac.jpg");
 
-             FilterNegative negative = new FilterNegative();
+            FilterNegative negative = new FilterNegative();
             //https://twitter.com/POOUCU?lang=en&lang=en
             FilterTwitterPublish twitterPublish = new FilterTwitterPublish();
+            FilterCognitive faceRecog = new FilterCognitive();
            
             IConvolutionMatrix matrix = new BlurConvolutionMatrix();
             FilterConvolution blurConvo = new FilterConvolution(matrix);
 
             PipeNull pipeEnd = new PipeNull();
-            PipeSerial pipe3 = new PipeSerial(twitterPublish,pipeEnd);
-            PipeSerial pipe2 = new PipeSerial(negative,pipe3);
-            PipeSerial pipe1 = new PipeSerial(blurConvo,pipe2);
+            //PipeSerial pipe32 = new PipeSerial(negative,pipeEnd);
+            PipeSerial pipe22 = new PipeSerial(negative,pipeEnd);
+            PipeSerial pipe21 = new PipeSerial(twitterPublish,pipeEnd);
+            PipeConditional pipe1 = new PipeConditional(faceRecog,pipe21,pipe22);
 
-            pictureProvider.SavePicture(pipe1.Send(picOrig),"TeroFiltrado.jpg"); 
+            pictureProvider.SavePicture(pipe1.Send(picOrig),"jacFiltrado.jpg"); 
 
         }
     }

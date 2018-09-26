@@ -8,7 +8,7 @@ namespace CompAndDel.Filters.Pipes
 {
     class PipeConditional : IPipe
     {
-        protected IFilter filtro;
+        protected IFilterBool filtro;
         protected IPipe nextPipeTrue;
         protected IPipe nextPipeFalse;
         
@@ -17,7 +17,7 @@ namespace CompAndDel.Filters.Pipes
         /// </summary>
         /// <param name="filtro">Filtro que se debe aplicar sobre la imagen</param>
         /// <param name="nextPipe">Siguiente cañería</param>
-        public PipeConditional(IFilter filtro, IPipe nextPipeTrue, IPipe nextPipeFalse)
+        public PipeConditional(IFilterBool filtro, IPipe nextPipeTrue, IPipe nextPipeFalse)
         {
             this.nextPipeTrue = nextPipeTrue;
             this.nextPipeFalse = nextPipeFalse;
@@ -26,10 +26,10 @@ namespace CompAndDel.Filters.Pipes
         /// <summary>
         /// Devuelve el proximo IPipe
         /// </summary>
-        public IPipe Next
+/*         public IPipe Next
         {
             get { return this.nextPipe; }
-        }
+        } */
         /// <summary>
         /// Devuelve el IFilter que aplica este pipe
         /// </summary>
@@ -45,10 +45,16 @@ namespace CompAndDel.Filters.Pipes
         {
             picture = this.filtro.Filter(picture);
 
-            if (this.filtro.booleano)
+            if (this.filtro.Boolean)
+            {
+                Console.WriteLine("Face Found! :)");
                 return this.nextPipeTrue.Send(picture);
+            }
             else
+            {
+                Console.WriteLine("No Face Found :(");
                 return this.nextPipeFalse.Send(picture);
+            }
         }
     }
 }

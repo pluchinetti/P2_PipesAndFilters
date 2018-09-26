@@ -8,7 +8,7 @@ using CognitiveCore;
 
 namespace CompAndDel.Filters
 {
-    public class FilterCognitive : IFilter
+    public class FilterCognitive : IFilterBool
     {
         /// <summary>
         /// Recibe una imagen y realiza el reconocimiento facial
@@ -16,19 +16,20 @@ namespace CompAndDel.Filters
         /// <param name="image">Imagen a la cual se la va a reconocer.</param>
         /// <returns>Imagen con el filtro aplicado</returns>
         
+        CognitiveFace cog = new CognitiveFace("6cc93ca750fc4e0b9b716925f303dcc1", Color.GreenYellow);
+        public bool Boolean {get; set;}
+        PictureProvider pictureProvider = new PictureProvider();
         
         public IPicture Filter(IPicture image)
-        {
-            PictureProvider pictureProvider = new PictureProvider();
+        {          
             pictureProvider.SavePicture(image,"TempForFacialRecognition.jpg");
-
-            CognitiveFace cog = new CognitiveFace("6cc93ca750fc4e0b9b716925f303dcc1", Color.GreenYellow);
             
             cog.Recognize(@"TempForFacialRecognition.jpg");
 
-            if cog.FaceFound()
-                return 
-            return negativo;
+            Boolean = cog.FaceFound;
+
+            IPicture picOrig = pictureProvider.GetPicture("tmpFace.jpg");
+            return picOrig;
         }
     }
 }
