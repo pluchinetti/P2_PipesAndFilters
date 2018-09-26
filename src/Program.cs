@@ -19,7 +19,7 @@ namespace CompAndDel
             IConvolutionMatrix matrix = new BlurConvolutionMatrix();
             FilterConvolution blurConvo = new FilterConvolution(matrix);
 
-             PipeNull pipeEnd = new PipeNull();
+            PipeNull pipeEnd = new PipeNull();
             PipeSerial pipe3 = new PipeSerial(twitterPublish,pipeEnd);
             PipeSerial pipe2 = new PipeSerial(negative,pipe3);
             PipeSerial pipe1 = new PipeSerial(blurConvo,pipe2);
