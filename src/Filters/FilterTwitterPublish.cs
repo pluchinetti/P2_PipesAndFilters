@@ -28,7 +28,7 @@ namespace CompAndDel.Filters
             // conveniente ya que se utiliza para un método puntual y no interesa quedarse con la referencia al objeto.
 
             var twitter = new TwitterImage(consumerKey, consumerKeySecret, accessToken, accessTokenSecret);
-            Console.WriteLine(twitter.PublishToTwitter("¿Cuál hay, G? Ahora con filtros, de nada...",@"TeroATwitter.jpg"));
+            Console.WriteLine(twitter.PublishToTwitter("Seguimos llenado de imágenes...",@"TeroATwitter.jpg"));
 
             return image;
         }
