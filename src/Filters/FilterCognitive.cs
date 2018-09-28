@@ -16,7 +16,7 @@ namespace CompAndDel.Filters
         /// <param name="image">Imagen a la cual se la va a reconocer.</param>
         /// <returns>Imagen con el filtro aplicado</returns>
         
-        CognitiveFace cog = new CognitiveFace("6cc93ca750fc4e0b9b716925f303dcc1", Color.GreenYellow);
+        CognitiveFace cog = new CognitiveFace("1cb420dea85344f59d014efe71c74e7d", Color.GreenYellow);
         public bool Boolean {get; set;}
         PictureProvider pictureProvider = new PictureProvider();
         
